@@ -5,15 +5,33 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class statesTest {
-    states states=new states();
+
+    states states;
+    @BeforeEach
+    public void init(){
+        states=new states();
+    }
+    @AfterEach
+    public void cleanUp(){
+        states =null;
+    }
 
 
+    @Test
+    public void test00()
+    {
+        states.statee('a');
+        assertEquals("NORMAL,DATE",states.getState());
+        assertEquals("2000-1-1",states.getDate());
+        assertEquals("0:0", states.getTime());
 
+    }
     @Test
     public void test0()
     {
         states.statee('a');
-        assertEquals("NORMAL,DATE",states.getState());
+        states.statee('a');
+        assertEquals("NORMAL,TIME",states.getState());
         assertEquals("2000-1-1",states.getDate());
         assertEquals("0:0", states.getTime());
 
